@@ -1,5 +1,15 @@
 # Tamper Proof Data Example
 
+## To run the apps
+
+create the database named bequest and follow the comands:
+
+```bash
+$ npm run migrate
+$ npm run seed
+$ npm run start
+```
+
 # Faq
 
 ### What does this project do?
