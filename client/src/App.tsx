@@ -33,8 +33,23 @@ function App() {
   const verifyData = async () => {
     
     const response = await fetch(`${API_URL}/blockchain/validate`);
-    alert(response);
+    if(response.status === 200){
+      alert("Data is valid");
+    }
+    else{
+      alert("Data is not valid");
+    }
   };
+
+  const recoveringChainFromDatabase = async () => {
+    const response = await fetch(`${API_URL}/blockchain/recover`);
+    if(response.status === 200){
+      alert("Data recovered");
+    }
+    else{
+      alert("Data is not valid in database");
+    }
+  }
 
   return (
     <div
@@ -65,6 +80,9 @@ function App() {
         </button>
         <button style={{ fontSize: "20px" }} onClick={verifyData}>
           Verify Data
+        </button>
+        <button style={{ fontSize: "20px" }} onClick={recoveringChainFromDatabase}>
+          Recover Data
         </button>
       </div>
     </div>

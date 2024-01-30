@@ -32,6 +32,13 @@ export class BlockchainController implements IBlockController {
   isChainValid = async (req: Request, res: Response, next: NextFunction) => {
     try {
       const response = await this.blockchain.isChainValid();
+
+      if (!response) {
+        res.status(STATUS_CODE.BAD_REQUEST).send({
+          message: 'The chain is not valid!'
+        });
+      }
+      
       res.status(STATUS_CODE.OK).send(response);
     } catch (error) {
       next(error);
@@ -50,6 +57,11 @@ export class BlockchainController implements IBlockController {
   recoverChain = async (req: Request, res: Response, next: NextFunction) => {
     try {
       const response = await this.blockchain.recoverChain();
+      if (!response) {
+        res.status(STATUS_CODE.BAD_REQUEST).send({
+          message: 'The chain could not be recovered from the database! contact some adminstrator!'
+        });
+      }
       res.status(STATUS_CODE.OK).send(response);
     } catch (error) {
       next(error);
