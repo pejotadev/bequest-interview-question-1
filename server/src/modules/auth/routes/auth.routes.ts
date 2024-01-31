@@ -1,8 +1,9 @@
 import express from "express";
-import { authService } from "../auth.factory";
+import { authController } from "../auth.factory";
 
 const authRoutes = express.Router();
 
-authRoutes.post("/register", authService.register);
+authRoutes.post("/register", authController.register);
+authRoutes.post("/login", authController.login);
 
 export default authRoutes;

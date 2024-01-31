@@ -34,7 +34,7 @@ User.init(
       field: "id",
     },
     private_key: {
-      type: DataTypes.STRING,
+      type: DataTypes.TEXT,
       allowNull: true,
       field: "private_key",
     },
@@ -54,20 +54,20 @@ User.init(
       field: "password",
     },
     public_key: {
-      type: DataTypes.STRING,
+      type: DataTypes.TEXT,
       allowNull: true,
       field: "public_key",
     },
     created_at: {
       type: DataTypes.DATE,
       allowNull: true,
-      defaultValue: Sequelize.literal("dbo.GetLocalDateTime()"),
+      defaultValue: Sequelize.literal("CURRENT_TIMESTAMP"),
       field: "created_at",
     },
     updated_at: {
       type: DataTypes.DATE,
       allowNull: true,
-      defaultValue: Sequelize.literal("dbo.GetLocalDateTime()"),
+      defaultValue: Sequelize.literal("CURRENT_TIMESTAMP"),
       field: "updated_at",
     },
     deleted_at: {
@@ -77,7 +77,7 @@ User.init(
     },
   },
   {
-    tableName: "user",
+    tableName: "users",
     sequelize: db.getSequelize(),
     timestamps: false,
   }

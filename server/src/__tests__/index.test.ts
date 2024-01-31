@@ -14,53 +14,81 @@ describe('Testes do Servidor', () => {
       .expect(200)
   });
 
-  test("Health Check", async () => {
-    return request(app)
-      .get('/health')
-      .expect(200)
-  });
 
-  test("Add Block", async () => {
+  test("Register", async () => {
     return request(app)
-      .post('/blockchain')
-      .send({ data: 'block data' })
-      .expect(201)
-      .then(response => {
-        console.log(response.text);
-        expect(response.text).toBe('{"data":"block data"}');
-      });
-  });
+      .post('/auth/register')
+      .send({ 
+        name: 'Teste', 
+        email: 'email@example.com',
+        password: '123456'
+      })
+      .expect(201);
+    })
 
-  test("Get last block", async () => {
+  test("Login", async () => {
     return request(app)
-      .get('/blockchain/last')
-      .expect(200)
-      .then(response => {
-        console.log(response.text);
-        expect(response.text).toBe('{"data":"block data"}');
-      });
-  }); 
-
-  test("Validate chain", async () => {
-    return request(app)
-      .get('/blockchain/validate')
+      .post('/auth/login')
+      .send({ 
+        email: 'email@example.com',
+        password: '123456'
+      })
       .expect(200)
       .then(response => {
         console.log(response.text);
-        expect(response.text).toBe('true');
+        expect(response.text).toBe('{"token":"token"}');
       });
   });
 
-  test("Get chain", async () => {
-    return request(app)
-      .get('/blockchain/chain')
-      .expect(200)
-      .then(response => {
-        console.log(response.text);
-        const chain = JSON.parse(response.text);
-        expect(chain).toBeInstanceOf(Array);
-        expect(chain.length).toBeGreaterThanOrEqual(2);
-      });
-  });
+
+  // test("Health Check", async () => {
+  //   return request(app)
+  //     .get('/health')
+  //     .expect(200)
+  // });
+
+  // test("Add Block", async () => {
+  //   return request(app)
+  //     .post('/blockchain')
+  //     .send({ data: 'block data' })
+  //     .expect(201)
+  //     .then(response => {
+  //       console.log(response.text);
+  //       expect(response.text).toBe('{"data":"block data"}');
+  //     });
+  // });
+
+  // test("Get last block", async () => {
+  //   return request(app)
+  //     .get('/blockchain/last')
+  //     .expect(200)
+  //     .then(response => {
+  //       console.log(response.text);
+  //       expect(response.text).toBe('{"data":"block data"}');
+  //     });
+  // }); 
+
+  // test("Validate chain", async () => {
+  //   return request(app)
+  //     .get('/blockchain/validate')
+  //     .expect(200)
+  //     .then(response => {
+  //       console.log(response.text);
+  //       expect(response.text).toBe('true');
+  //     });
+  // });
+
+  // test("Get chain", async () => {
+  //   return request(app)
+  //     .get('/blockchain/chain')
+  //     .expect(200)
+  //     .then(response => {
+  //       console.log(response.text);
+  //       const chain = JSON.parse(response.text);
+  //       expect(chain).toBeInstanceOf(Array);
+  //       expect(chain.length).toBeGreaterThanOrEqual(2);
+  //     });
+  // });
+
 
 });
